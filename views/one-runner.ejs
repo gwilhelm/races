@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Runner Data: <%=item.name%></title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <a href="/"><h1>Race Data</h1></a>
+    <dl vocab="http://schema.org/" typeof="Person">
+      <dt>Name</dt>
+      <dd property="name"><%=item.name%></dd>
+      <dt>Race</dt>
+      <dd property="performerIn" typeof="SportsEvent">
+        <% related_items.forEach(function(related_item) { %>
+            <% if (related_item._id === item.race) { %>
+                <a href="/races/<%=item.race%>">
+                    <span property="name"><%=related_item.name%></span>
+                </a>
+            <% }}); %>
+      </dd>
+      <% if (item.time) { %>
+      <dt>Time</dt>
+      <dd property="awards"><%=item.time%></dd>
+      <% } %>
+      <% if (item.country) { %>
+      <dt>Country</dt>
+      <dd property="nationality"><%=item.country%></dd>
+      <% } %>
+      <% if (item.image) { %>
+      <dt>Image URL</dt>
+      <dd><img property="image" src="<%=item.image%>" alt="<%=item.name%>"></dd>
+      <% } %>
+    </dl>
+    <div class="control">
+      <h2>Update runner</h2>
+      <form method="post" action="/runners/<%=item._id%>">
+        <input type="hidden" name="_method" value="put">
+        <!-- The line above tells the server to treat this as a PUT request. -->
+        <label>Name: 
+          <input name="item[name]" value="<%=item.name%>" type="text" required>
+        </label>
+        <label>Race: 
+          <select name="item[race]" required>
+            <% related_items.forEach(function(related_item) { %>
+            <option value="<%=related_item._id%>"
+              <% if (related_item._id === item.race) { %>selected<% } %>>
+              <%=related_item.name%>
+            </option>
+            <% }); %>
+          </select>
+        </label>
+        <label>Time:
+          <input name="item[time]" value="<%=item.time%>" type="text" required>
+        </label>
+        <label>Country:
+          <input name="item[country] value="<%=item.country%>" type="text">
+        </label>
+        <label>Image URL:
+          <input name="item[image]" value="<%=item.image%>" type="url" size="80"> 
+        </label>
+        <button>Update</button>
+      </form>
+    </div>
+  </body>
+</html>

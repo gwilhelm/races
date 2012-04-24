@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Race Data: <%=item.name%></title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <a href="/"><h1>Race Data</h1></a>
+    <dl vocab="http://schema.org/" typeof="SportsEvent">    
+      <dt>Race Name</dt>
+      <dd property="name"><%=item.name%></dd>
+      <dt>Race URL</dt>
+      <dd property="url"><%=item.url%></dd>
+      <% if (item.description) { %>
+      <dt>Description</dt>
+      <dd property="description"><%=item.description%></dd>
+      <% } %>
+      <dt>Runners</dt>
+      
+      <dd property="performers">
+        <% if (related_items.length > 0) { %>
+        <ul>
+          <% related_items.forEach(function(related_item) { %>
+          <li typeof="Person">
+            <a href="/runners/<%=related_item._id%>">
+              <span property="name"><%=related_item.name%></span>
+            </a>
+          </li>
+          <% }); %>
+        </ul>
+        <% } else { %>
+        No runners have been entered in this race.
+        <% } %>
+      </dd>
+    </dl>
+    <div class="control">
+      <h2>Add a new runner</h2>
+      <form id="create-runner" method="post" action="/runners/">
+        <input type="hidden" name="item[race]" value="<%=item._id%>">
+        <!-- The line above links the runner to be created to this race. -->
+        <label>Runner Name: 
+          <input name="item[name]" type="text" required
+                   placeholder="Gary Wilhelm">
+        </label>
+        <label>Runner Time:
+          <input name="item[time]" type="text" required placeholder="00:00:00">
+        </label>
+        <label>Runner Image URL:
+          <input name="item[image]" type="url" size="80"
+                   placeholder="http://www.law.unc.edu/components/handlers/image.ashx?personnelid=1&typeid=11">
+        </label>
+        <label>Country:
+          <input name="item[country] type="text" placeholder="United States">
+        </label>
+        <button>Add</button>
+      </form>
+    </div>
+  </body>
+</html>

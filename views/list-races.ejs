@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Race Data: List of Races</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <a href="/"><h1>Race Data</h1></a>
+    <% if (items.length > 0) { %>
+    <ul>
+      <% items.forEach(function(item) { %>
+      <li vocab="http://schema.org/" typeof="SportsEvent"><a href="/races/<%=item._id%>"><span property="name"><%=item.name%></span></a></li>
+      <% }); %>
+    </ul>
+    <% } else { %>
+    <div>No races have been added.</div>
+    <% } %>
+    <div class="control">
+      <h2>Add or update a new race</h2>
+      <script>
+      function onFormSubmit(form) {
+        form.action = form.action + form.elements['item[id]'].value;
+        console.log(form.action);
+        return true;
+      } 
+      </script>
+      <form method="post" action="/races/"
+            onsubmit="return onFormSubmit(this);">
+        <!-- The line above dynamically sets the PUT destination when the -->
+        <!-- form is submitted. -------------------------------------------->
+        <input type="hidden" name="_method" value="put">
+        <!-- The line above tells the server to treat this as a PUT request. -->
+        <label>Race ID<br>
+          (lowercase letters or numbers only, no spaces):
+          <input name="item[id]" type="text" pattern="[a-z0-9]+" required
+                 placeholder="bostonmarathon2012">
+        </label>
+        <label>Race Name:
+          <input name="item[name]" type="text" required placeholder="Boston Marathon 2012">                
+        </label>
+        <label>Race URL:
+          <input name="item[url]" type="url" required placeholder="http://www.baa.org/">
+        </label>
+        <label>Race description:
+          <textarea name="item[description]" cols="80" rows="10" 
+                    placeholder="The Boston Marathon is held every year on Patriot's Day, a Massachusetts holiday on the third Monday in April. It starts in Hopkinton, MA and goes to Boston, MA."
+          ></textarea>
+        </label>
+        <button>Add or update</button>
+      </form>
+    </div>
+  </body>
+</html>
