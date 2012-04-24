@@ -17,12 +17,12 @@
       <% } %>
       <dt>Runners</dt>
       
-      <dd property="performers">
+      <dd>
         <% if (related_items.length > 0) { %>
         <ul>
           <% related_items.forEach(function(related_item) { %>
-          <li typeof="Person">
-            <a href="/runners/<%=related_item._id%>">
+          <li property="performers" typeof="Person">
+            <a property="url" href="/runners/<%=related_item._id%>">
               <span property="name"><%=related_item.name%></span>
             </a>
           </li>

@@ -13,7 +13,7 @@
       <dd property="performerIn" typeof="SportsEvent">
         <% related_items.forEach(function(related_item) { %>
             <% if (related_item._id === item.race) { %>
-                <a href="/races/<%=item.race%>">
+                <a property="url" href="/races/<%=item.race%>">
                     <span property="name"><%=related_item.name%></span>
                 </a>
             <% }}); %>

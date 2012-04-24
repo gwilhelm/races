@@ -9,7 +9,7 @@
     <% if (items.length > 0) { %>
     <ul>
       <% items.forEach(function(item) { %>
-      <li vocab="http://schema.org/" typeof="SportsEvent"><a href="/races/<%=item._id%>"><span property="name"><%=item.name%></span></a></li>
+      <li vocab="http://schema.org/" typeof="SportsEvent"><a property="url" href="/races/<%=item._id%>"><span property="name"><%=item.name%></span></a></li>
       <% }); %>
     </ul>
     <% } else { %>

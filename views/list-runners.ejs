@@ -8,10 +8,10 @@
     <a href="/"><h1>Race Data</h1></a>
     <% if (items.length > 0) { %>
     <div vocab="http://schema.org/" typeof="SportsEvent">
-    <ul property="performers">
+    <ul>
       <% items.forEach(function(item) { %>
-      <li typeof="Person">
-        <a href="/runners/<%=item._id%>"><span property="name"><%=item.name%></span></a> 
+      <li property="performers" typeof="Person">
+        <a property="url" href="/runners/<%=item._id%>"><span property="name"><%=item.name%></span></a> 
         (<span property="nationality"><%=item.country%></span>)
       </li>
       <% }); %>
