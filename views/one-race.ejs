@@ -10,7 +10,7 @@
       <dt>Race Name</dt>
       <dd property="name"><%=item.name%></dd>
       <dt>Race URL</dt>
-      <dd property="url"><%=item.url%></dd>
+      <dd><a href='<%=item.url%>'><span property="url"><%=item.url%></span></a></dd>
       <% if (item.description) { %>
       <dt>Description</dt>
       <dd property="description"><%=item.description%></dd>
@@ -50,7 +50,7 @@
                    placeholder="http://www.law.unc.edu/components/handlers/image.ashx?personnelid=1&typeid=11">
         </label>
         <label>Country:
-          <input name="item[country] type="text" placeholder="United States">
+          <input name="item[country]" type="text" placeholder="United States">
         </label>
         <button>Add</button>
       </form>

@@ -10,7 +10,10 @@
     <div vocab="http://schema.org/" typeof="SportsEvent">
     <ul property="performers">
       <% items.forEach(function(item) { %>
-      <li typeof="Person"><a href="/runners/<%=item._id%>"><span property="name"><%=item.name%></span></a></li>
+      <li typeof="Person">
+        <a href="/runners/<%=item._id%>"><span property="name"><%=item.name%></span></a> 
+        (<span property="nationality"><%=item.country%></span>)
+      </li>
       <% }); %>
     </ul>
     </div>
