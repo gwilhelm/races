@@ -8,16 +8,16 @@
     <a href="/" rel="index"><h1>Race Data</h1></a>
     <% if (items.length > 0) { %>
     <div id="races">
-    <ul class="races">
+    <ul class="all-races">
       <% items.forEach(function(item) { %>
-      <li vocab="http://schema.org/" typeof="SportsEvent"><a property="url" class="url" href="/races/<%=item._id%>" rel="race"><span property="name" class="name"><%=item.name%></span></a></li>
+      <li vocab="http://schema.org/" typeof="SportsEvent" class="race"><a property="url" class="race-url" href="/races/<%=item._id%>" rel="race"><span property="name" class="race-name"><%=item.name%></span></a></li>
       <% }); %>
     </ul>
     </div>
     <% } else { %>
     <div>No races have been added.</div>
     <% } %>
-    <div class="control">
+    <div>
       <h2>Add or update a new race</h2>
       <script>
       function onFormSubmit(form) {

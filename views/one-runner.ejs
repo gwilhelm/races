@@ -8,27 +8,27 @@
     <a href="/" rel="index"><h1>Race Data</h1></a>
     <dl vocab="http://schema.org/" typeof="Person" id="runner">
       <dt>Name</dt>
-      <dd property="name" class="name"><%=item.name%></dd>
+      <dd property="name"><span class="runner-name"><%=item.name%></span></dd>
       <dt>Race</dt>
       <dd property="performerIn" typeof="SportsEvent" class="race">
         <% related_items.forEach(function(related_item) { %>
             <% if (related_item._id === item.race) { %>
-                <a property="url" class="url" href="/races/<%=item.race%>">
-                    <span property="name" class="name"><%=related_item.name%></span>
+                <a property="url" class="race-url" href="/races/<%=item.race%>">
+                    <span property="name" class="race-name"><%=related_item.name%></span>
                 </a>
             <% }}); %>
       </dd>
       <% if (item.time) { %>
       <dt>Time</dt>
-      <dd property="awards" class="time"><%=item.time%></dd>
+      <dd property="awards"><span class="runner-time"><%=item.time%></span></dd>
       <% } %>
       <% if (item.country) { %>
       <dt>Country</dt>
-      <dd property="nationality" class="country"><%=item.country%></dd>
+      <dd property="nationality"><span class="country"><%=item.country%></span></dd>
       <% } %>
       <% if (item.image) { %>
       <dt>Image URL</dt>
-      <dd><img property="image" class="image" src="<%=item.image%>" alt="<%=item.name%>"></dd>
+      <dd><img property="image" class="runner-image" src="<%=item.image%>" alt="<%=item.name%>"></dd>
       <% } %>
     </dl>
     <div class="control">

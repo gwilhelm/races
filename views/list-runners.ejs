@@ -8,10 +8,10 @@
     <a href="/" rel="index"><h1>Race Data</h1></a>
     <% if (items.length > 0) { %>
     <div vocab="http://schema.org/" typeof="SportsEvent" id="runners">
-    <ul class="runners">
+    <ul class="all-runners">
       <% items.forEach(function(item) { %>
       <li property="performers" typeof="Person" class="runner">
-        <a property="url" class="url" href="/runners/<%=item._id%>" rel="runner"><span property="name" class="name"><%=item.name%></span></a> 
+        <a property="url" class="runner-url" href="/runners/<%=item._id%>" rel="runner"><span property="name" class="runner-name"><%=item.name%></span></a> 
         (<span property="nationality" class="country"><%=item.country%></span>)
       </li>
       <% }); %>
@@ -20,10 +20,10 @@
     <% } else { %>
     <div>No runners found.</div>
     <% } %>
-    <div class="control">
+    <div>
       <h2>Search for runners by name</h2>
       <form class="search-runners" method="get" action="/runners/">
-        <label for="name">Runner name: <input name="name"></label>
+        <label for="name">Runner name: <input name="name" type="text"></label>
         <button>Search</button>
       </form>
     </div>

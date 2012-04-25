@@ -8,22 +8,22 @@
     <a href="/" rel="index"><h1>Race Data</h1></a>
     <dl vocab="http://schema.org/" typeof="SportsEvent" id="race">    
       <dt>Race Name</dt>
-      <dd property="name" class="name"><%=item.name%></dd>
+      <dd property="name"><span class="race-name"<%=item.name%></span></dd>
       <dt>Race URL</dt>
-      <dd><a href='<%=item.url%>'><span property="url" class="url"><%=item.url%></span></a></dd>
+      <dd><a class="race-url" href='<%=item.url%>'><span property="url"><%=item.url%></span></a></dd>
       <% if (item.description) { %>
       <dt>Description</dt>
-      <dd property="description" class="description"><%=item.description%></dd>
+      <dd property="description"><span class="race-description"><%=item.description%></span></dd>
       <% } %>
       <dt>Runners</dt>
       
       <dd>
         <% if (related_items.length > 0) { %>
-        <ul id="runners">
+        <ul class="all-runners">
           <% related_items.forEach(function(related_item) { %>
           <li property="performers" class="runner" typeof="Person">
-            <a property="url" class="url" href="/runners/<%=related_item._id%>">
-              <span property="name" class="name"><%=related_item.name%></span>
+            <a property="url" class="runner-url" href="/runners/<%=related_item._id%>">
+              <span property="name" class="runner-name"><%=related_item.name%></span>
             </a>
           </li>
           <% }); %>
@@ -33,9 +33,9 @@
         <% } %>
       </dd>
     </dl>
-    <div class="control">
+    <div>
       <h2>Add a new runner</h2>
-      <form id="create-runner" class="create-runner" method="post" action="/runners/">
+      <form class="create-runner" method="post" action="/runners/">
         <input type="hidden" name="item[race]" value="<%=item._id%>">
         <!-- The line above links the runner to be created to this race. -->
         <label for="item[name]">Runner Name: 

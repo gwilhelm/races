@@ -1,41 +1,106 @@
-# An example web information service
+# Application Flow
 
-This is an example application intended to be used as a starting point for the final project in [INLS 490-186 Web Information Organization](http://aeshin.org/teaching/inls-490-186/2012/sp/).
+# ID attribute values
 
-## Forking this repository
+* _races_
+    Applied to a div tag.  The list of races in this representation.
+* _runners_
+    Applied to a div tag.  The list of runners in this representation.
+* _race_
+    Applied to a dl tag.  The list of parameters for a race in this representation.
+* _runner_
+    Applied to a dl tag.  The list of parameters for a runner in this representation.
 
-You will want to start by [forking](http://help.github.com/fork-a-repo/) this repository so you have your own copy to modify. If you decide to work in a group, I will put a copy of the code in your shared repository. (While it's possible to collaborate with your group by pushing and pulling commits across your two or three separate forks, doing so requires somewhat advanced knowledge of Git and thus isn't expected for this assignment.)
+# Class attribute values
 
-If you're working alone, please **rename your GitHub repository** to something more suitable for your service. You can do this by clicking on the ![admin](/sils-webinfo/election/raw/master/doc/img/admin.png) button from your repository's page on GitHub. A one-word, no-spaces name is best. (If you're working in a group the repository will be named after your group).
+* _actions_
+    Applied to an unordered list.  The list of actions for the application.
+* _all-races_
+    Applied to an unordered list.  Represents the entire list of races.
+* _race_
+    Applied to a list item tag or a dd tag.  Represents a race.
+* _race-url_
+    Applied to an A tag.  Represents the URL for a race.
+* _race-name_
+    Applied to a span tag.  Represents the name for a race.
+* _race-description_
+    Applied to a span tag.  Represents the description of a race.
+* _update-race_
+    Applied to a form tag.  Used to update attributes for a race in this representation.
+* _all-runners_
+    Applied to an unordered list.  Represents the entire list of runners.
+* _runner_
+    Applied to a list item tag.  Represents a runner.
+* _runner-url_
+    Applied to an A tag.  Represents the URL for a runner.
+* _runner-name_
+    Applied to a span tag.  Represents the name of a runner.
+* _runner-time_
+    Applied to a span tag.  Represents the time of a runner in a race.
+* _runner-image_
+    Applied to an img tag.  Represents the image of a runner.
+* _country_
+    Applied to a span tag.  Represents the country of a runner.
+* _search-runners_
+    Applied to a form tag.  Used to search for runners in this representation.
+* _create-runner_
+    Applied to a form tag.  Used to create a runner in this representation.
+* _update-runner_
+    Applied to a form tag.  Used to update a runner in this representation.
 
-## Cloning your project in Cloud9
+# Name attribute values
 
-*Coming soon*
+* __method_
+    Applied to an INPUT[hidden] element.  The method of a form.
+* _item[id]_
+    Applied to an INPUT[text] element.  The ID of a race.
+* _item[name]_
+    Applied to an INPUT[text] element.  The name of a race or a runner.
+* _item[url]_
+    Applied to an INPUT[url] element.  The URL of a race.
+* _item[description]_
+    Applied to a TEXTAREA element.  The description of a race.
+* _name_
+    Applied to an INPUT[text] element.  The name of a runner, when searching for a runner.
+* _item[race]
+    Applied to an INPUT[hidden] element or a SELECT element.  The ID of a race, used for linking runners to races
+* _item[time]
+    Applied to an INPUT[text] element.  The time of a runner in a race.
+* _item[image]
+    Applied to an INPUT[url] element.  The URL of an image of a runner.
+* _item[country]
+    Applied to an INPUT[text] element.  The country of a runner.
 
-## Modifying the example code
+# Rel attribute values
 
-There are only three places where the example service needs to be modified to implement your own service:
+* _index_
+    Applied to an A tag.  A reference to the list of actions of the application.
+* _races_
+    Applied to an A tag.  A reference to the list of all races.
+* _runners_
+    Applied to an A tag.  A reference to the list of all runners.
+* _race_
+    Applied to an A tag.  A reference to a single race.
+* _runner_
+    Applied to an A tag.  A reference to a single runner.
 
-1. [`app.js`](https://github.com/sils-webinfo/election/blob/master/app.js) contains all the logic for handling HTTP requests. You may just need to modify the examples in this file, or you may need to add additional request handlers by copying, pasting, and modifying these examples. The only parts you should *need* to change are marked with with `TODO` comments. In particular, make sure you edit the value of the `USER_OR_GROUP_NAME` variable at the top of this file to match your GitHub user name (if you're working alone) or your group name:
+# Data Description (RDFa)
 
-    ```javascript
-    var USER_OR_GROUP_NAME = ''; // TODO: Insert GitHub username or group name.
-    ```
-
-1. The [`views`](https://github.com/sils-webinfo/election/tree/master/views) directory contains all the EJS ([Embedded JavaScript](http://embeddedjs.com/)) templates for the service. You will need to create new templates suitable for your application, using these examples as models. The templates should include the metadata describing your application flow and data.
-
-1. Finally, you need to edit [`package.json`](https://github.com/sils-webinfo/election/blob/master/package.json) and change the value of the `name` property to whatever you named your project.
-
-## Testing your code
-
-*Coming soon*
-
-## Troubleshooting
-
-*Coming soon*
-
-## Deploying to Heroku
-
-*Coming soon*
-
-
+* _vocab_
+    * http://schema.org/
+* _typeof_
+    * SportsEvent - used to refer to a single race
+    * Person - used to refer to one or more runners in a race
+* _property_
+    * url (in SportsEvent) - used to refer to the URL of a race   
+    * name (in SportsEvent) - used to refer to the name of a race
+    * performers (in SportsEvent) - used to refer to the runners of a race.  Typeof is Person
+    * description (in SportsEvent) - used to refer to the description of a race
+    * url (in Person) - used to refer to the URL of a runner
+    * name (in Person) - used to refer to the name of a runner
+    * nationality (in Person) - used to refer to the country of a runner
+    * performerIn (in Person) - used to refer to the race in which a runner participated.  Typeof is SportsEvent
+    * awards (in Person) - used to refer to the runner's time in a race
+    * image (in Person) - used to refer to the image of a runner
+    
+    
