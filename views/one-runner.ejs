@@ -5,41 +5,41 @@
     <link rel="stylesheet" href="/style.css">
   </head>
   <body>
-    <a href="/"><h1>Race Data</h1></a>
-    <dl vocab="http://schema.org/" typeof="Person">
+    <a href="/" rel="index"><h1>Race Data</h1></a>
+    <dl vocab="http://schema.org/" typeof="Person" id="runner">
       <dt>Name</dt>
-      <dd property="name"><%=item.name%></dd>
+      <dd property="name" class="name"><%=item.name%></dd>
       <dt>Race</dt>
-      <dd property="performerIn" typeof="SportsEvent">
+      <dd property="performerIn" typeof="SportsEvent" class="race">
         <% related_items.forEach(function(related_item) { %>
             <% if (related_item._id === item.race) { %>
-                <a property="url" href="/races/<%=item.race%>">
-                    <span property="name"><%=related_item.name%></span>
+                <a property="url" class="url" href="/races/<%=item.race%>">
+                    <span property="name" class="name"><%=related_item.name%></span>
                 </a>
             <% }}); %>
       </dd>
       <% if (item.time) { %>
       <dt>Time</dt>
-      <dd property="awards"><%=item.time%></dd>
+      <dd property="awards" class="time"><%=item.time%></dd>
       <% } %>
       <% if (item.country) { %>
       <dt>Country</dt>
-      <dd property="nationality"><%=item.country%></dd>
+      <dd property="nationality" class="country"><%=item.country%></dd>
       <% } %>
       <% if (item.image) { %>
       <dt>Image URL</dt>
-      <dd><img property="image" src="<%=item.image%>" alt="<%=item.name%>"></dd>
+      <dd><img property="image" class="image" src="<%=item.image%>" alt="<%=item.name%>"></dd>
       <% } %>
     </dl>
     <div class="control">
       <h2>Update runner</h2>
-      <form method="post" action="/runners/<%=item._id%>">
+      <form class="update-runner" method="post" action="/runners/<%=item._id%>">
         <input type="hidden" name="_method" value="put">
         <!-- The line above tells the server to treat this as a PUT request. -->
-        <label>Name: 
+        <label for="item[name]>Name: 
           <input name="item[name]" value="<%=item.name%>" type="text" required>
         </label>
-        <label>Race: 
+        <label for="item[race]">Race: 
           <select name="item[race]" required>
             <% related_items.forEach(function(related_item) { %>
             <option value="<%=related_item._id%>"
@@ -49,13 +49,13 @@
             <% }); %>
           </select>
         </label>
-        <label>Time:
+        <label for="item[time]">Time:
           <input name="item[time]" value="<%=item.time%>" type="text" required>
         </label>
-        <label>Country:
+        <label for="item[country]">Country:
           <input name="item[country]" value="<%=item.country%>" type="text">
         </label>
-        <label>Image URL:
+        <label for="item[image]">Image URL:
           <input name="item[image]" value="<%=item.image%>" type="url" size="80"> 
         </label>
         <button>Update</button>

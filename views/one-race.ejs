@@ -5,25 +5,25 @@
     <link rel="stylesheet" href="/style.css">
   </head>
   <body>
-    <a href="/"><h1>Race Data</h1></a>
-    <dl vocab="http://schema.org/" typeof="SportsEvent">    
+    <a href="/" rel="index"><h1>Race Data</h1></a>
+    <dl vocab="http://schema.org/" typeof="SportsEvent" id="race">    
       <dt>Race Name</dt>
-      <dd property="name"><%=item.name%></dd>
+      <dd property="name" class="name"><%=item.name%></dd>
       <dt>Race URL</dt>
-      <dd><a href='<%=item.url%>'><span property="url"><%=item.url%></span></a></dd>
+      <dd><a href='<%=item.url%>'><span property="url" class="url"><%=item.url%></span></a></dd>
       <% if (item.description) { %>
       <dt>Description</dt>
-      <dd property="description"><%=item.description%></dd>
+      <dd property="description" class="description"><%=item.description%></dd>
       <% } %>
       <dt>Runners</dt>
       
       <dd>
         <% if (related_items.length > 0) { %>
-        <ul>
+        <ul id="runners">
           <% related_items.forEach(function(related_item) { %>
-          <li property="performers" typeof="Person">
-            <a property="url" href="/runners/<%=related_item._id%>">
-              <span property="name"><%=related_item.name%></span>
+          <li property="performers" class="runner" typeof="Person">
+            <a property="url" class="url" href="/runners/<%=related_item._id%>">
+              <span property="name" class="name"><%=related_item.name%></span>
             </a>
           </li>
           <% }); %>
@@ -35,21 +35,21 @@
     </dl>
     <div class="control">
       <h2>Add a new runner</h2>
-      <form id="create-runner" method="post" action="/runners/">
+      <form id="create-runner" class="create-runner" method="post" action="/runners/">
         <input type="hidden" name="item[race]" value="<%=item._id%>">
         <!-- The line above links the runner to be created to this race. -->
-        <label>Runner Name: 
+        <label for="item[name]">Runner Name: 
           <input name="item[name]" type="text" required
                    placeholder="Gary Wilhelm">
         </label>
-        <label>Runner Time:
+        <label for="item[time]">Runner Time:
           <input name="item[time]" type="text" required placeholder="00:00:00">
         </label>
-        <label>Runner Image URL:
+        <label for="item[image]">Runner Image URL:
           <input name="item[image]" type="url" size="80"
                    placeholder="http://www.law.unc.edu/components/handlers/image.ashx?personnelid=1&typeid=11">
         </label>
-        <label>Country:
+        <label for="item[country]">Country:
           <input name="item[country]" type="text" placeholder="United States">
         </label>
         <button>Add</button>

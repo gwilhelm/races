@@ -5,14 +5,14 @@
     <link rel="stylesheet" href="/style.css">
   </head>
   <body>
-    <a href="/"><h1>Race Data</h1></a>
+    <a href="/" rel="index"><h1>Race Data</h1></a>
     <% if (items.length > 0) { %>
-    <div vocab="http://schema.org/" typeof="SportsEvent">
-    <ul>
+    <div vocab="http://schema.org/" typeof="SportsEvent" id="runners">
+    <ul class="runners">
       <% items.forEach(function(item) { %>
-      <li property="performers" typeof="Person">
-        <a property="url" href="/runners/<%=item._id%>"><span property="name"><%=item.name%></span></a> 
-        (<span property="nationality"><%=item.country%></span>)
+      <li property="performers" typeof="Person" class="runner">
+        <a property="url" class="url" href="/runners/<%=item._id%>" rel="runner"><span property="name" class="name"><%=item.name%></span></a> 
+        (<span property="nationality" class="country"><%=item.country%></span>)
       </li>
       <% }); %>
     </ul>
@@ -22,8 +22,8 @@
     <% } %>
     <div class="control">
       <h2>Search for runners by name</h2>
-      <form method="get" action="/runners/">
-        <label>Runner name: <input name="name"></label>
+      <form class="search-runners" method="get" action="/runners/">
+        <label for="name">Runner name: <input name="name"></label>
         <button>Search</button>
       </form>
     </div>
